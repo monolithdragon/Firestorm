@@ -1,14 +1,41 @@
 {
     "name": "monolitdragon/firestorm",
     "description": "A PHP framework for building web applications",
+    "keywords": ["framework", "php", "firestorm"],
     "type": "library",
     "license": "MIT",
+    "readme": "",
+    "time": "",
+    "support": {
+        "issues": "https://github.com/monolithdragon/Firestorm/issues",
+        "source": "https://github.com/monolithdragon/Firestorm",
+        "wiki": "https://github.com/monolithdragon/Firestorm/wiki"
+    },
     "authors": [
         {
             "name": "monolithdragon",
-            "email": "joo.lajos76@gmail.com"
+            "email": "joo.lajos76@gmail.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "alpha",
-    "require": {}
+    "require": {
+        "php": "7.4.2|^8.1",
+        "ext-mbstring": "*",
+        "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Firestorm\\": "src/Firestorm/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Firestorm\\Tests\\": "tests/"
+        }
+    }
 }
