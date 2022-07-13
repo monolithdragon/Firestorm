@@ -6,7 +6,7 @@ namespace Firestorm\DatabaseConnection;
 
 use Firestorm\DatabaseConnection\Exception\DatabaseException;
 use PDO;
-use PDOException;
+use Exception;
 
 class Database implements DatabaseInterface
 {
@@ -49,8 +49,8 @@ class Database implements DatabaseInterface
                 $this->credentials['password'],
                 $options
             );
-        } catch(PDOException $ex) {
-            throw new DatabaseException($ex->getMessage(), $ex->getCode());            
+        } catch(Exception $ex) {
+            throw new DatabaseException($ex->getMessage(), (int)$ex->getCode());            
         }
 
         return $this->pdo;
