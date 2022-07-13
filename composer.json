@@ -1,0 +1,14 @@
+{
+    "name": "monolitdragon/firestorm",
+    "description": "A PHP framework for building web applications",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "monolithdragon",
+            "email": "joo.lajos76@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {}
+}
