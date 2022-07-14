@@ -14,7 +14,7 @@ class DataMapperFactory
         $credentials = (new $dataMapperEnvironmentConfiguration([]))->getDatabaseCredentials('mysql');
         $database = new $databaseClass($credentials);
         if (!$database instanceof DatabaseInterface) {
-            throw new DataMapperException($database . 'is not valid database connection object.');
+            throw new DataMapperException($databaseClass . ' is not valid database connection object.');
         }
 
         return new DataMapper($database);

@@ -12,7 +12,7 @@ class QueryBuilderFactory
     {
         $queryBuilder = new $queryBuilderClass;
         if (!$queryBuilder instanceof QueryBuilderInterface) {
-            throw new QueryBuilderException($queryBuilder . ' is not a valid Query builder object');
+            throw new QueryBuilderException($queryBuilderClass . ' is not a valid Query builder object');
         }
 
         return $queryBuilder;
