@@ -28,7 +28,7 @@ class QueryBuilder implements QueryBuilderInterface
         'raw' => ''
     ];
 
-    protected const QUERY_TYPES = ['select', 'insert', 'update', 'delete', 'raw'];
+    protected const QUERY_TYPES = ['select', 'insert', 'update', 'delete', 'raw', 'search'];
 
     public function buildQuery(array $args): self
     {
@@ -70,10 +70,9 @@ class QueryBuilder implements QueryBuilderInterface
 
     public function updateQuery(): string
     {
-        $values = '';
-
-        if ($this->isQueryTypeValid('update')) {
+        if ($this->isQueryTypeValid('update')) {            
             if (is_array($this->key['fields']) && count($this->key['fields']) > 0) {
+                $values = '';
                 foreach ($this->key['fields'] as $field) {
                     if ($field !== $this->key['primary_key']) {
                         $values .= $field . " = :" . $field . ", ";
@@ -113,9 +112,34 @@ class QueryBuilder implements QueryBuilderInterface
         return false;
     }
 
+    public function searchQuery(): string
+    {
+        if ($this->isQueryTypeValid('search')) {
+            $selectors = (!empty($this->key['selectors'])) ? implode(', ', $this->key['selectors']) : '*';
+            $this->sqlQuery = "SELECT {$selectors} FROM {$this->key['table']} WHERE ";
+            if (isset($this->key['selectors'])) {
+                $values = [];
+                foreach ($this->key['selectors'] as $selector) {
+                    $values[] = $selector . " LIKE " . "{$selector}";
+                }
+                if (count($this->key['selectors']) >= 1) {
+                    $this->sqlQuery .= implode(" OR ", $values);
+                }
+            }
+            return $this->sqlQuery;            
+        }
+
+        return false;
+    }
+
     public function rawQuery(): string
     {
-        return $this->sqlQuery;
+        if ($this->isQueryTypeValid('raw')) {
+            $this->sqlQuery = $this->key['raw'];
+
+            return $this->sqlQuery;
+        }
+        return false;
     }
 
     private function isQueryTypeValid(string $type): bool
