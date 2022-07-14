@@ -20,6 +20,7 @@ interface GlobalManagerInterface
      *
      * @param  string $key
      * @return mixed
+     * @throws GlobalManagerException
      */
     public static function get(string $key);
 }
