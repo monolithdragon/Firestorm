@@ -32,6 +32,14 @@ class DataMapper implements DataMapperInterface
         $this->db = $db;
     }
 
+    /**
+     * Check the incoming $valis isn't empty else throw an exception
+     * 
+     * @param mixed $value
+     * @param string|null $errorMessage
+     * @return void
+     * @throws DataMapperException
+     */
     private function isEmpty($value, string $errorMessage = null)
     {
         if (empty($value)) {
@@ -39,6 +47,13 @@ class DataMapper implements DataMapperInterface
         }
     }
 
+    /**
+     * Check the incoming argument $value is an array else throw an exception
+     * 
+     * @param array $value
+     * @return void
+     * @throws DataMapperException
+     */
     private function isArray(array $value)
     {
         if (!is_array($value)) {
@@ -183,5 +198,34 @@ class DataMapper implements DataMapperInterface
         }
  
         return $this->statement;
+    }
+
+     /**
+     * Returns the query condition merged with the query parameters
+     * 
+     * @param array $conditions
+     * @param array $parameters
+     * @return array
+     */
+    public function buildQueryParameters(array $conditions = [], array $parameters = []): array
+    {
+        return (!empty($params) || !empty($conditions)) ? array_merge($conditions, $parameters) : $parameters;
+    }
+
+    /**
+     * Persist queries to database
+     * 
+     * @param string $sqlQuery
+     * @param array $params
+     * @return mixed
+     * @throws Throwable
+     */
+    public function persist(string $sqlQuery, array $params)
+    {
+        try {
+            return $this->prepare($sqlQuery)->bindParameters($params)->execute();
+        } catch (Throwable $th) {
+            throw $th;
+        }
     }
 }
