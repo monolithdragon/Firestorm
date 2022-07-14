@@ -6,7 +6,6 @@ namespace Firestorm\LiquidOrm\DataRepository;
 
 use Firestorm\LiquidOrm\DataMapper\DataMapperEnvironmentConfiguration;
 use Firestorm\LiquidOrm\DataRepository\Exception\DataRepositoryException;
-use Firestorm\LiquidOrm\EntityManager\EntityManager;
 use Firestorm\LiquidOrm\LiquidOrmManager;
 
 class DataRepositoryFactory

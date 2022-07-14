@@ -4,7 +4,7 @@ declare(strict_type=1);
 
 namespace Firestorm\LiquidOrm\DataMapper;
 
-use Firestorm\DatabaseConnection\DatabaseInterface;
+use Firestorm\Database\DatabaseInterface;
 use PDO;
 use PDOStatement;
 use Firestorm\LiquidOrm\DataMapper\Exception\DataMapperException;

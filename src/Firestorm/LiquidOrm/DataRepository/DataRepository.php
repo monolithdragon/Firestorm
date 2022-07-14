@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Firestorm\LiquidOrm\DataRepository;
 
-use Firestorm\LiquidOrm\DataRepository\Exception\DataRepositoryException;
 use Firestorm\LiquidOrm\DataRepository\Exception\DataRepositoryInvalidArgumentException;
 use Firestorm\LiquidOrm\EntityManager\EntityManagerInterface;
 use Throwable;
