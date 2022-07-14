@@ -4,6 +4,9 @@ declare(strict_type=1);
 
 namespace Firestorm\Router;
 
+use Firestorm\Router\Exception\RouterException;
+use Firestorm\Router\Exception\RouterMethodNotFoundException;
+
 class Router implements RouterInterface
 {
     /**
@@ -30,9 +33,9 @@ class Router implements RouterInterface
     /**
      * @inheritDoc     
      */
-    public function add(string $rout, array $params): void
+    public function add(string $route, array $params): void
     {
-        $this->routes[$rout] = $params;
+        $this->routes[$route] = $params;
     }
 
     /**
@@ -53,13 +56,13 @@ class Router implements RouterInterface
                 if (is_callable([$controllerObject, $action])) {
                     $controllerObject->$action();
                 } else {
-                    throw new \Exception();                    
+                    throw new RouterMethodNotFoundException();                    
                 }
             } else {
-                throw new \Exception();
+                throw new RouterException();
             }
         } else {
-            throw new \Exception();
+            throw new RouterException();
         }
     }
 

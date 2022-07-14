@@ -1,8 +1,10 @@
 <?php
 
-namespace ;
+declare(strict_types=1);
 
-class RouterException
-{
+namespace Firestorm\Router\Exception;
 
-}
+use Exception;
+
+class RouterException extends Exception
+{}
