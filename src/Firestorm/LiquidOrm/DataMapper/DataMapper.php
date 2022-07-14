@@ -66,6 +66,7 @@ class DataMapper implements DataMapperInterface
      */
     public function prepare(string $sqlQuery): self
     {
+        $this->isEmpty($sqlQuery);
         $this->statement = $this->db->open()->prepare($sqlQuery);
         return $this;
     }
@@ -100,6 +101,8 @@ class DataMapper implements DataMapperInterface
      */
     public function bindParameters(array $fields, bool $isSearch = false): self
     {
+        $this->isArray($fields);
+
         if (is_array($fields)) {
             $type = (!$isSearch) 
                 ? $this->bindValues($fields) 
@@ -136,7 +139,7 @@ class DataMapper implements DataMapperInterface
     /**
      * @inheritDoc
      */
-    public function result(): object
+    public function result(): Object
     {
         if ($this->statement){
             return $this->statement->fetch(PDO::FETCH_OBJ);

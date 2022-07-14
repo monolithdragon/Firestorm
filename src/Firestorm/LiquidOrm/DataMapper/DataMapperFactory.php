@@ -9,9 +9,20 @@ use Firestorm\LiquidOrm\DataMapper\Exception\DataMapperException;
 
 class DataMapperFactory
 {
-    public function create(string $databaseClass, string $dataMapperEnvironmentConfiguration): DataMapperInterface
+    /**
+     * Creates the data mapper object and inject the dependency for this object. We are also
+     * creating the Database Object
+     * $dataMapperEnvironmentConfiguration get instantiated in the DataRepositoryFactory
+     *
+     * @param  string              $databaseClass
+     * @param  Object              $dataMapperEnvironmentConfiguration
+     * @return DataMapperInterface
+     * @throws DataMapperException
+     */
+    public function create(string $databaseClass, Object $dataMapperEnvironmentConfiguration): DataMapperInterface
     {
-        $credentials = (new $dataMapperEnvironmentConfiguration([]))->getDatabaseCredentials('mysql');
+        // Create databaseConnection Object and pass the database credentials in
+        $credentials = $dataMapperEnvironmentConfiguration->getDatabaseCredentials('mysql');
         $database = new $databaseClass($credentials);
         if (!$database instanceof DatabaseInterface) {
             throw new DataMapperException($databaseClass . ' is not valid database connection object.');

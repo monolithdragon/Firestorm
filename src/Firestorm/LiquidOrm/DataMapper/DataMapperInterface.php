@@ -50,9 +50,9 @@ interface DataMapperInterface
     /**
      * Returns a single database row as an object.
      *
-     * @return object
+     * @return Object
      */
-    public function result(): object;
+    public function result(): Object;
 
     /**
      * Returns all the rows whithin the database as an array.
