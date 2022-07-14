@@ -22,6 +22,9 @@ class Crud implements CrudInterface
     /** @var string */
     protected string $tableSchemaID;
 
+    /** @var array */
+    protected array $options;
+
     /**
      * Main constructor
      *
@@ -29,13 +32,15 @@ class Crud implements CrudInterface
      * @param QueryBuilder $queryBuilder
      * @param string $tableSchema
      * @param string $tableSchemaID
+     * @param array $options
      */
-    public function __construct(DataMapper $dataMapper, QueryBuilder $queryBuilder, string $tableSchema, string $tableSchemaID)
+    public function __construct(DataMapper $dataMapper, QueryBuilder $queryBuilder, string $tableSchema, string $tableSchemaID, array $options = [])
     {
         $this->dataMapper = $dataMapper;
         $this->queryBuilder = $queryBuilder;
         $this->tableSchema = $tableSchema;
         $this->tableSchemaID = $tableSchemaID;
+        $this->options = $options;
     }
 
     /**
@@ -91,7 +96,7 @@ class Crud implements CrudInterface
             $args = ['table' => $this->getSchema(), 'type' => 'select', 'selectors' => $selectors, 'conditions' => $conditions, 'params' => $parameters, 'extras' => $optionals];
             $query = $this->queryBuilder->buildQuery($args)->selectQuery();
             $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions, $parameters));
-            if ($this->dataMapper->rowCount() > 0) {
+            if ($this->dataMapper->rowCount() >= 0) {
                 return $this->dataMapper->results();
             }
         } catch (Throwable $th) {
@@ -142,7 +147,7 @@ class Crud implements CrudInterface
             $args = ['table' => $this->getSchema(), 'type' => 'search', 'selectors' => $selectors, 'conditions' => $conditions];
             $query = $this->queryBuilder->buildQuery($args)->searchQuery();
             $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions));
-            if ($this->dataMapper->rowCount() > 0) {
+            if ($this->dataMapper->rowCount() >= 0) {
                 return $this->dataMapper->results();
             }
         } catch (Throwable $th) {

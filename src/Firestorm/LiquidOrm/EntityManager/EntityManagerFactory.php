@@ -22,9 +22,9 @@ class EntityManagerFactory
         $this->queryBuilder = $queryBuilder;
     }
 
-    public function create(string $crudClass, string $tableSchema, string $tabSchemaID): EntityManagerInterface
+    public function create(string $crudClass, string $tableSchema, string $tabSchemaID, array $options = []): EntityManagerInterface
     {
-        $crud = new $crudClass($this->dataMapper, $this->queryBuilder, $tableSchema, $tabSchemaID);
+        $crud = new $crudClass($this->dataMapper, $this->queryBuilder, $tableSchema, $tabSchemaID, $options);
         if (!$crud instanceof CrudInterface) {
             throw new CrudException($crudClass . ' is not a valid crud object.');
         }
