@@ -44,17 +44,17 @@ class Router implements RouterInterface
     public function dispatch(string $url): void
     {
         if ($this->match($url)) {
-            $controllerString = $this->params['controller'];
-            $controllerString = str_replace(' ', '', ucwords(str_replace('-', ' ', $controllerString)));
-            $controllerString = $this->getNamespace($controllerString);
+            $controllerClass = $this->params['controller'];
+            $controllerClass = str_replace(' ', '', ucwords(str_replace('-', ' ', $controllerClass)));
+            $controllerClass = $this->getNamespace($controllerClass);
 
-            if (class_exists($controllerString)) {
-                $controllerObject = new $controllerString;
+            if (class_exists($controllerClass)) {
+                $controller = new $controllerClass($this->params);
                 $action = $this->params['action'];
                 $action = lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $action))));
 
-                if (is_callable([$controllerObject, $action])) {
-                    $controllerObject->$action();
+                if (is_callable([$controller, $action])) {
+                    $controller->$action();
                 } else {
                     throw new RouterMethodNotFoundException();                    
                 }

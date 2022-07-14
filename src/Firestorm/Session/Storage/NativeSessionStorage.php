@@ -6,16 +6,27 @@ namespace Firestorm\Session\Storage;
 
 class NativeSessionStorage extends SessionStorage
 {
+    /**
+     * Main class constructor
+     *
+     * @param  array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setSession(string $key, $value): void
     {
         $_SESSION[$key] = $value;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSession(string $key, $default = null)
     {
         if ($this->hasSession($key)) {
@@ -25,11 +36,17 @@ class NativeSessionStorage extends SessionStorage
         return $default;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setArraySession(string $key, $value): void
     {
         $_SESSION[$key][] = $value;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteSession(string $key): void
     {
         if ($this->hasSession($key)) {
@@ -37,6 +54,9 @@ class NativeSessionStorage extends SessionStorage
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function invalidate(): void
     {
         $_SESSION = array();
@@ -50,6 +70,9 @@ class NativeSessionStorage extends SessionStorage
         session_destroy();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function flush(string $key, $default = null)
     {
         if ($this->hasSession($key)) {
@@ -61,6 +84,9 @@ class NativeSessionStorage extends SessionStorage
         return $default;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function hasSession(string $key): bool
     {
         return isset($_SESSION[$key]);
