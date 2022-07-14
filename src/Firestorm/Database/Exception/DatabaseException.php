@@ -2,7 +2,7 @@
 
 declare(strict_type=1);
 
-namespace Firestorm\DatabaseConnection\Exception;
+namespace Firestorm\Database\Exception;
 
 use PDOException;
 

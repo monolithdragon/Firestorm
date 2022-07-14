@@ -2,7 +2,7 @@
 
 declare(strict_type=1);
 
-namespace Firestorm\DatabaseConnection;
+namespace Firestorm\Database;
 
 use PDO;
 
