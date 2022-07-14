@@ -13,9 +13,9 @@ class SessionManager
      * we will fetch the session name and array of options from the core configuration
      * files
      *
-     * @return Object
+     * @return SessionInterface
      */
-    public function initialize(): Object
+    public static function initialize(): SessionInterface
     {
         $sessionFactory = new SessionFactory;
         return $sessionFactory->create('', NativeSessionStorage::class, array());
