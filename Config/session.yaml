@@ -1,5 +1,5 @@
-session_name: ''
-lifetime: '0'
+session_name: 'firestorm'
+lifetime: 0
 path: '/'
 domain: ''
 secure: false
@@ -8,3 +8,4 @@ gc_maxlifetime: '1800'
 gc_probability: '1000'
 gc_divisor: '1'
 use_cookies: '1'
+cookie_lifetime: '1'

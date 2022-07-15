@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Firestorm\Session;
 
 use Firestorm\Session\Storage\NativeSessionStorage;
+use Firestorm\Yaml\YamlConfig;
 
 class SessionManager
 {
@@ -18,6 +19,6 @@ class SessionManager
     public static function initialize(): SessionInterface
     {
         $sessionFactory = new SessionFactory;
-        return $sessionFactory->create('', NativeSessionStorage::class, array());
+        return $sessionFactory->create('firestorm', NativeSessionStorage::class, YamlConfig::file('session'));
     }
 }

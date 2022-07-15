@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Firestorm\Application;
 
+use Firestorm\Traits\System;
+
 class Application
 {
+    use System;
+
     protected string $appRoot;
 
     public function __construct(string $appRoot)
@@ -27,13 +31,19 @@ class Application
         return $this;
     }
 
+    public function setSession(): self
+    {
+        $this->sessionInit(true);
+        return $this;
+    }
+
     private function constants(): void
     {
-        define('DS', DIRECTORY_SEPARATOR);
-        define('ROOT', $this->appRoot . DS);
-        define('CONFIG_PATH', ROOT . 'Config' . DS);
-        define('TEMPLATE_PATH', ROOT . 'App/templates' . DS);
-        define('LOG_DIR', ROOT . 'tmp/log' . DS);
+        defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+        defined('ROOT') or define('ROOT', $this->appRoot . DS);
+        defined('CONFIG_PATH') or define('CONFIG_PATH', ROOT . 'Config' . DS);
+        defined('TEMPLATE_PATH') or define('TEMPLATE_PATH', ROOT . 'App/templates' . DS);
+        defined('LOG_DIR') or define('LOG_DIR', ROOT . 'tmp/log' . DS);
     }
 
     private function enviroment(): void
