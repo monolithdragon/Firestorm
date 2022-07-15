@@ -7,6 +7,7 @@ namespace Firestorm\Core;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extension\DebugExtension;
+use Firestorm\Twig\TwigExtension;
 
 class View
 {
@@ -21,7 +22,7 @@ class View
     {
         static $twig;
         if ($twig === null) {
-            $loader = new FilesystemLoader('templates', TEMPLATE_PATH);
+            $loader = new FilesystemLoader('templates', TEMPLATES_PATH);
             $twig = new Environment($loader);
             $twig->addExtension(new DebugExtension);
             $twig->addExtension(new TwigExtension);

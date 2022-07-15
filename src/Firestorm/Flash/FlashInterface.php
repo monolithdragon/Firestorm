@@ -7,7 +7,7 @@ namespace Firestorm\Flash;
 interface FlashInterface
 {
     /**
-     * Add a fash message stored with the session
+     * Add a flash message stored with the session
      *
      * @param  string $message
      * @param  string $type

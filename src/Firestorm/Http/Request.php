@@ -8,6 +8,11 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Request
 {
+    /**
+     * Wrapper method for dymfony http request
+     *
+     * @return HttpRequest
+     */
     public function handler(): HttpRequest
     {
         if (!isset($request)) {

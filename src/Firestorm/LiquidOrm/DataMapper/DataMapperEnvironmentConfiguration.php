@@ -28,6 +28,7 @@ class DataMapperEnvironmentConfiguration
      *
      * @param  string $driver
      * @return array
+     * @throws DataMapperInvalidArgumentException
      */
     public function getDatabaseCredentials(string $driver): array
     {
@@ -50,6 +51,7 @@ class DataMapperEnvironmentConfiguration
      *
      * @param  string $driver
      * @return void
+     * @throws DataMapperInvalidArgumentException
      */
     public function isCredentialsValid(string $driver): void
     {

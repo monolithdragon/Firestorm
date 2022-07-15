@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class Response
 {
+    /**
+     * Wrapper method for dymfony http response
+     *
+     * @return HttpResponse
+     */
     public function handler(): HttpResponse
     {
         if (!isset($response)) {
