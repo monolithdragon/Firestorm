@@ -45,7 +45,7 @@ class ErrorHandling
             echo '<p>StackTrace: ' . $exception->getTraceAsString() . '</p>';
             echo '<p>Thrown in : ' . $exception->getFile() . ' on line ' . $exception->getLine() . '</p>';
         } else {
-            $errorLog = LOG_DIR . '/' . date('Y-m-d H:is') . '.txt';
+            $errorLog = LOG_DIR . date('Y-m-d H:is') . '.txt';
             ini_set('error_log', $errorLog);
             $message = 'Uncought exception: ' . get_class($exception);
             $message .= 'With message ' . $exception->getMessage();

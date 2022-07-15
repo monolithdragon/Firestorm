@@ -22,7 +22,7 @@ class View
     {
         static $twig;
         if ($twig === null) {
-            $loader = new FilesystemLoader('templates', TEMPLATES_PATH);
+            $loader = new FilesystemLoader('templates', TEMPLATE_PATH);
             $twig = new Environment($loader);
             $twig->addExtension(new DebugExtension);
             $twig->addExtension(new TwigExtension);
